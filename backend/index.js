@@ -26,12 +26,11 @@ app.use(cors(corsOptions));
 // Clerk Authentication Middleware
 app.use(requireAuth());
 
-// routes
+// app.use('/api/v1/', passRoute);
 app.use('/api/v1/user/', userRoute);
 app.use('/api/v1/post/', postRoute);
 app.use('/api/v1/feedback/', feedbackRoute);
 
-// listen the app
 app.listen(PORT, () => {
    connectDB();
    console.log(`server listen at http://localhost:${PORT}`);
