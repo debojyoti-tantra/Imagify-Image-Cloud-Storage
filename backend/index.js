@@ -27,10 +27,10 @@ app.get("/", (req, res) => {
 });
 
 app.use('/api/v1/user/', userRoute);
-app.use('/api/v1/post/', requireAuth(), postRoute);
-app.use('/api/v1/feedback/', requireAuth(), feedbackRoute);
+app.use('/api/v1/post/', postRoute);
+app.use('/api/v1/feedback/', feedbackRoute);
 
-app.listen(PORT, async () => {
-   await connectDB();
+app.listen(PORT, () => {
+   connectDB();
    console.log(`server listen at http://localhost:${PORT}`);
 });
