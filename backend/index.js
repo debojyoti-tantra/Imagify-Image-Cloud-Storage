@@ -1,44 +1,36 @@
-import express, { urlencoded } from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import connectDB from "./utils/db.js";
+import express, {urlencoded} from 'express';
+import cors from 'cors';
 
-import userRoute from "./routes/userRoute.js";
-import postRoute from "./routes/postRoute.js";
-import feedbackRoute from "./routes/feedbackRoute.js";
-import isAuthenticated from "./middlewares/auth.js";
+import dotenv from 'dotenv';
+dotenv.config({});
+import connectDB from './utils/db.js';
 
-dotenv.config();
+import userRoute from './routes/userRoute.js';
+import postRoute from './routes/postRoute.js';
+import feedbackRoute from './routes/feedbackRoute.js';
+import { requireAuth } from "@clerk/express";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// Middlewares
+// middlewares
 app.use(express.json());
-app.use(urlencoded({ extended: true }));
-
+app.use(urlencoded({extended:true}));
 const corsOptions = {
-  origin: process.env.VITE_FRONTEND_URL,
-  credentials: true,
+   origin: process.env.VITE_FRONTEND_URL,
+   credentials:true
 };
 app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
-  res.json({ message: "Hello, World!" });
+  res.send("Hello, World!");
 });
 
-// Authentication Fix: Apply `requireAuth()` only to protected routes
-app.use("/api/v1/user/", userRoute); // Signup/login should not need authentication
-app.use("/api/v1/post/", isAuthenticated, postRoute);
-app.use("/api/v1/feedback/", isAuthenticated, feedbackRoute);
+app.use('/api/v1/user/', userRoute);
+app.use('/api/v1/post/', requireAuth(), postRoute);
+app.use('/api/v1/feedback/', requireAuth(), feedbackRoute);
 
-(async () => {
-  try {
-    await connectDB();
-    console.log("✅ Database connected successfully!");
-    app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
-  } catch (error) {
-    console.error("❌ Database Connection Failed:", error.message);
-    process.exit(1);
-  }
-})();
+app.listen(PORT, async () => {
+   await connectDB();
+   console.log(`server listen at http://localhost:${PORT}`);
+});
