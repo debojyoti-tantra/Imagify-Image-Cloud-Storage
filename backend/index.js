@@ -25,6 +25,10 @@ app.use(cors(corsOptions));
 // Clerk Authentication Middleware
 app.use(requireAuth());
 
+app.get("/", (req, res) => {
+  res.send("Imagify-Backend");
+});
+
 app.use('/api/v1/user/', userRoute);
 app.use('/api/v1/post/', postRoute);
 app.use('/api/v1/feedback/', feedbackRoute);
