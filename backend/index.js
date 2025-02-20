@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config({});
 import connectDB from './utils/db.js';
 
+import passRoute from './routes/passRoute.js';
 import userRoute from './routes/userRoute.js';
 import postRoute from './routes/postRoute.js';
 import feedbackRoute from './routes/feedbackRoute.js';
@@ -22,16 +23,14 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Clerk Authentication Middleware
-app.use(requireAuth());
-
 app.get("/", (req, res) => {
-  res.send("Imagify-Backend");
+  res.send("Hello, World!");
 });
 
-app.use('/api/v1/user/', userRoute);
-app.use('/api/v1/post/', postRoute);
-app.use('/api/v1/feedback/', feedbackRoute);
+// app.use('/api/v1/', passRoute);
+app.use('/api/v1/user/', requireAuth(), userRoute);
+app.use('/api/v1/post/', requireAuth(), postRoute);
+app.use('/api/v1/feedback/', requireAuth(), feedbackRoute);
 
 app.listen(PORT, () => {
    connectDB();
