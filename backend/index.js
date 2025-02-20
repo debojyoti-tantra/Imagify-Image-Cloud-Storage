@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 dotenv.config({});
 import connectDB from './utils/db.js';
 
-import passRoute from './routes/passRoute.js';
 import userRoute from './routes/userRoute.js';
 import postRoute from './routes/postRoute.js';
 import feedbackRoute from './routes/feedbackRoute.js';
@@ -26,7 +25,6 @@ app.use(cors(corsOptions));
 // Clerk Authentication Middleware
 app.use(requireAuth());
 
-// app.use('/api/v1/', passRoute);
 app.use('/api/v1/user/', userRoute);
 app.use('/api/v1/post/', postRoute);
 app.use('/api/v1/feedback/', feedbackRoute);
