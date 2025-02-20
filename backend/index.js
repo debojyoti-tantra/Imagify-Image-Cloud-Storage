@@ -6,7 +6,7 @@ import connectDB from "./utils/db.js";
 import userRoute from "./routes/userRoute.js";
 import postRoute from "./routes/postRoute.js";
 import feedbackRoute from "./routes/feedbackRoute.js";
-import isAuthenticated from "./middlewares/authMiddleware.js";
+import isAuthenticated from "./middlewares/auth.js";
 
 dotenv.config();
 
