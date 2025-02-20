@@ -21,15 +21,14 @@ const corsOptions = {
    credentials:true
 };
 app.use(cors(corsOptions));
-app.use(requireAuth());
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
 
 app.use('/api/v1/user/', userRoute);
-app.use('/api/v1/post/', postRoute);
-app.use('/api/v1/feedback/', feedbackRoute);
+app.use('/api/v1/post/', requireAuth(), postRoute);
+app.use('/api/v1/feedback/', requireAuth(), feedbackRoute);
 
 app.listen(PORT, () => {
    connectDB();
