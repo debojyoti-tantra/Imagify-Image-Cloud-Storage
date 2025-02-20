@@ -83,24 +83,24 @@ Imagify is a MERN stack-based cloud image storage platform where users can uploa
 
 - 1️⃣ Clone the Repository
 ```sh
-git clone https://github.com/your-username/imagify.git
-cd imagify
+git clone https://github.com/debojyoti-tantra/Imagify-Image-Cloud-Storage.git
+cd Imagify-Image-Cloud-Storage
 ```
 
 - 2️⃣ Backend Setup
 ```sh
 cd backend
-npm install
+pnpm install
 cp .env.example .env  # Add your environment variables
-npm run dev  # Start the server
+pnpm run dev  # Start the server
 ```
 
 - 3️⃣ Frontend Setup
 ```sh
 cd ../frontend
-npm install
+pnpm install
 cp .env.example .env  # Add your environment variables
-npm run dev  # Start the frontend
+pnpm run dev  # Start the frontend
 ```
 
 ---
@@ -148,4 +148,3 @@ npm run dev
 
 ## 🔗 Live Demo: [Deploy Link Here]
 ## 🔥 Imagify – Your Personal Image Cloud! 🚀🥰🙏🥰
-
