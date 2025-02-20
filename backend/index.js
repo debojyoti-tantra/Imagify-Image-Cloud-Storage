@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 dotenv.config({});
 import connectDB from './utils/db.js';
 
-import passRoute from './routes/passRoute.js';
 import userRoute from './routes/userRoute.js';
 import postRoute from './routes/postRoute.js';
 import feedbackRoute from './routes/feedbackRoute.js';
