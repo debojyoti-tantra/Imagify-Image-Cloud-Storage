@@ -21,6 +21,7 @@ const corsOptions = {
    credentials:true
 };
 app.use(cors(corsOptions));
+app.use(requireAuth());
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");
