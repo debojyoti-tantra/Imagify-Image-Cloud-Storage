@@ -16,23 +16,6 @@ import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 
 function App() {
-   // const [PUBLISHABLE_KEY, setPUBLISHABLE_KEY] = useState('');
-   
-   // useEffect(() => {
-   //    const getPass = async () => {
-   //       try {
-   //          const res = await axios.get('http://localhost:8000/api/v1/pass', {withCredentials:true});
-   //          if (res.data.success) {
-   //          setPUBLISHABLE_KEY(res.data.pass)
-   //          }
-   //       } catch (error) {
-   //          console.log(error);
-   //       }
-   //    };
-   //    getPass();
-   // }, []);
-   
-   // Import your Publishable Key
    const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
    
    if (!PUBLISHABLE_KEY) {
