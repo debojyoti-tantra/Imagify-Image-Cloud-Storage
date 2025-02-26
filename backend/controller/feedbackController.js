@@ -1,6 +1,6 @@
 import { Feedback } from '../models/feedbackModel.js';
+import axios from 'axios';
 
-// add a feedback
 export const addFeedback = async (req, res) => {
    try {
       const { name, email, message } = req.body;
@@ -12,17 +12,18 @@ export const addFeedback = async (req, res) => {
          });
       }
 
+      // Save feedback to MongoDB
       const newFeedback = new Feedback({ name, email, message });
       await newFeedback.save();
 
       return res.status(201).json({
          success: true,
-         message: 'Feedback submitted successfully',
+         message: 'Feedback submitted successfully!',
          feedback: newFeedback
       });
 
    } catch (error) {
-      console.error(error);
+      console.error("Error in addFeedback:", error);
       return res.status(500).json({
          success: false,
          message: 'Internal server error',
@@ -31,7 +32,6 @@ export const addFeedback = async (req, res) => {
    }
 };
 
-// get all feedback
 export const getAllFeedback = async (req, res) => {
    try {
       const feedbacks = await Feedback.find().sort({createdAt: -1});
