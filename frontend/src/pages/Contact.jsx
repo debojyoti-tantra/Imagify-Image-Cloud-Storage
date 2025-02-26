@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react';
-import emailjs from '@emailjs/browser';
 import { Input } from '../components/ui/input.jsx';
 import { Button } from '../components/ui/button.jsx';
 import { Textarea } from '../components/ui/textarea.jsx';
@@ -53,42 +52,20 @@ export default function Contact() {
          if (res.data.success) {
             toast.success(res.data.message);
             
-            setFeedbacks((pre) => [res.data.feedback, ...pre])
-            setMessage('')
+            setFeedbacks((pre) => [res.data.feedback, ...pre]);
+            setMessage('');
          }
       } catch (error) {
          console.log(error);
          toast.error(error.response.data.message);
+      } finally {
+        setLoading(false);
       }
-
-      emailjs
-         .send(
-            import.meta.env.VITE_EMAILJS_SERVICE_ID,
-            import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-            {
-               from_name: user?.fullName,
-               from_email: user?.primaryEmailAddress?.emailAddress,
-               message
-            },
-            import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-         )
-         .then(
-            () => {
-               toast.success('Message sent successfully!');
-               form.current.reset();
-            },
-            (error) => {
-               toast.error('Failed to send message. Try again later.');
-               console.error('EmailJS Error:', error.text);
-            }
-         )
-         .finally(() => setLoading(false));
    };
    
    useEffect(() => {  
       const fetchAllFeedbacks = async () => {
          const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/feedback/getallfeedbacks`, { withCredentials:true });
-         console.log(res.data);
          if (res.data.success) {
             setFeedbacks(res.data.feedbacks);
          }
