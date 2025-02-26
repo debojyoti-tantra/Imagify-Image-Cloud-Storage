@@ -1,5 +1,4 @@
 import { Feedback } from '../models/feedbackModel.js';
-import axios from 'axios';
 
 export const addFeedback = async (req, res) => {
    try {
